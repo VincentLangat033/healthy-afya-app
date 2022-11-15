@@ -28,7 +28,18 @@
             <a href="#" class="hover:text-green-800"> Services</a>
             <a href="#" class="hover:text-green-800">About</a>
             <a href="#" class="hover:text-green-800">Community</a>
-            <a href="#" class="hover:text-green-800">Community</a>
+            
+              {% if user.is_authenticated %}
+              <a href="{% url 'login' %}" class="hover:text-green-800">
+                Logout
+              </a>
+              {% else %}
+              <a href="{% url 'login' %}" class="hover:text-green-800">
+                Login
+              </a>
+              
+              {% endif %}
+            
 
         </div>
         <!-- Button -->

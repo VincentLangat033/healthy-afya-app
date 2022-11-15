@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index.html/', include('bookingapp.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
+    path('members/', include('django.contrib.auth.urls')),
+    path('members/', include('members.urls')),
    
 ]
