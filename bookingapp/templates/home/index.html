@@ -34,6 +34,9 @@
                 Logout
               </a>
               {% else %}
+              <a href="{% url 'register_user' %}" class="hover:text-green-800">
+                Register
+              </a>
               <a href="{% url 'login' %}" class="hover:text-green-800">
                 Login
               </a>
