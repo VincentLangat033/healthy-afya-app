@@ -23,9 +23,9 @@ from . import models
 @admin.register(models.Patient)
 class PatientAdmin(admin.ModelAdmin):
     # autocomplete_fields = ['first_name']
-    prepopulated_fields = {
-        'slug': ['first_name']
-    }
+    # prepopulated_fields = {
+    #     'slug': ['first_name']
+    # }
     # actions = ['clear_inventory']
     list_display = ['first_name', 'last_name', 'age',
                      'email', 'phone'
