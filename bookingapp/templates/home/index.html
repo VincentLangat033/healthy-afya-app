@@ -30,7 +30,7 @@
             <a href="#" class="hover:text-green-800">Community</a>
             
               {% if user.is_authenticated %}
-              <a href="{% url 'login' %}" class="hover:text-green-800">
+              <a href="{% url 'logout' %}" class="hover:text-green-800">
                 Logout
               </a>
               {% else %}
@@ -39,9 +39,19 @@
               </a>
               
               {% endif %}
+              <!-- <select name="dog-names" id="dog-names">
+                  <option value="rigatoni">Home</option>
+                <option value="dave">About</option>
+                <option value="pumpernickel">Signout</option>
+                <option value="reeses">Sign In</option>
+              </select> -->
             
+              
 
         </div>
+        <!-- Drop Down Option -->
+
+
         <!-- Button -->
         <!-- hidden md:block -->
         <a href="" class="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight">
