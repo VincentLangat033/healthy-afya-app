@@ -51,3 +51,22 @@ class Address(models.Model):
     city = models.CharField(max_length=255)
     patient = models.ForeignKey(
         Patient, on_delete=models.CASCADE)
+
+
+class County(models.Model):
+    NBI = 'Nairobi'
+    MSA = 'Mombasa'
+    NKR = 'Nakuru'
+    KSM = 'Kisumu'
+
+    COUNTY_OPTIONS = [
+        (NBI, 'Nairobi'),
+        (NKR, 'Mombasa'),
+         (NKR, 'Nakuru'),
+        (KSM, 'Kisumu'),
+    ]
+
+    county = models.CharField(max_length=255, choices=COUNTY_OPTIONS, null=True)
+
+    def __str__(self):
+        return self.county
