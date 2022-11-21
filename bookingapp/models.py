@@ -44,28 +44,24 @@ class Patient(models.Model):
 
 
 class Doctor(models.Model):
-    S_DERMATOLOGY = 'Dermatology'
-    S_FAMILY_MEDICINE = 'Family Medicine'
-    S_INTERNAL_MEDICINE = 'Internal Medicine'
-    S_NEUROSURGERY = 'Neurosurgery'
-    S_GYNAECOLOGY = 'Gynaecology'
-    S_ONCOLOGY = 'Oncology'
-    S_PAEDIATRICS = 'Paediatrics'
-    S_PSYCHIATRY = 'Psychiatry'
-    S_UROLOGY = 'Urology'
-    S_PUBLIC_HEALTH = 'Public Health'
+
+    CARD ='Cardiologist'
+    DERMA = 'Dermatologist'
+    EMERGE =  'Emergency Specialist'
+    ALLERGY = 'Allergy Specialist'
+    ANAE = 'Anesthesiologist'
+    COLON = 'COlon and Rectal Surgeon'
+    NORMAL = 'Consultant'
+
 
     SPECIALIZATION_CHOICES = [
-        (S_DERMATOLOGY, 'Dermatology'),
-        (S_FAMILY_MEDICINE, 'Family Medicine'),
-        (S_INTERNAL_MEDICINE, 'Internal Medicine'),
-        (S_NEUROSURGERY, 'Neurosurgery'),
-        (S_GYNAECOLOGY, 'Gynaecology'),
-        (S_ONCOLOGY, 'Oncology'),
-        (S_PAEDIATRICS, 'Paediatrics'),
-        (S_PSYCHIATRY, 'Psychiatry'),
-        (S_UROLOGY, 'Urology'),
-        (S_PUBLIC_HEALTH, 'Public Health'),
+        (CARD, 'Cardiologist'),
+        (DERMA, 'Dermatologist'),
+        (EMERGE, 'Emergency Specialist'),
+        (ALLERGY, 'Allergy Specialist'),
+        (ANAE, 'Anesthesiologist'),
+        (COLON, 'COlon and Rectal Surgeon'),
+        (NORMAL, 'Consultant'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor', null=True)
     age = models.IntegerField()
