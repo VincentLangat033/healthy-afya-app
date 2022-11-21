@@ -3,10 +3,23 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import  messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
-from .models import Patient
+from .models import Patient, County
+
+
+@login_required(login_url='/members/login_user/')
+def doctor_region(request):
+    doctor_region = County.objects.all()
+    return render(request, 'doctor/regions.html',{'doctor_region': doctor_region})
+
+def region(request, id):
+    county_id = id
+    county = County.objects.get(pk=county_id)
+    return render(request, 'doctor/region.html', {'county': county})
+
 
 
 def register_user(request):
@@ -21,8 +34,10 @@ def register_user(request):
             birth_date = form.cleaned_data.get('birth_date')
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
-            user = User.objects.get(username=username, password=password)
-            user_data = Patient.objects.create(user=user, phone=phone, gender=gender, birth_date=birth_date, first_name=first_name, last_name=last_name)
+            user = User.objects.get(username=username)
+            print(user.username)
+            print(user.first_name)
+            user_data = Patient.objects.create(user=user, phone=phone, gender=gender, birth_date=birth_date)
             user_data.save()
 
             user = authenticate(username=username, password=password)
@@ -36,4 +51,9 @@ def register_user(request):
 
 def home(request):
     return render(request, 'home/index.html')
+
+
+@login_required(login_url='/register')
+def doctor(request):
+    return render(request, 'doctor/doctor.html')
 

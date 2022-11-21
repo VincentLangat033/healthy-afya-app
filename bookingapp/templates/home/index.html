@@ -1,4 +1,4 @@
-<!-- {% load static %} -->
+{% load static %}  
 {% load tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}  
+    <link href="{% static 'css/bootstrap.min.css' %}"> 
     {% tailwind_css %}
+    <link href="{% static 'css/bootstrap.min.css' %}">  
+    <script src="{% static 'bootstrap.min.js' %}"></script>  
+    <!-- <script>alert();</script>   -->
     <title>Afya-app</title>
     <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
     
@@ -28,13 +33,23 @@
             <a href="#" class="hover:text-green-800"> Services</a>
             <a href="#" class="hover:text-green-800">About</a>
             <a href="#" class="hover:text-green-800">Community</a>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- Dropdown link -->
+              <!-- </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>  -->
             
               {% if user.is_authenticated %}
               <a href="{% url 'logout' %}" class="hover:text-green-800">
                 Logout
               </a>
               {% else %}
-              <a href="{% url 'register_user' %}" class="hover:text-green-800">
+              <a href="{% url 'register-patient' %}" class="hover:text-green-800">
                 Register
               </a>
               <a href="{% url 'login' %}" class="hover:text-green-800">
@@ -124,7 +139,10 @@ Service providers For Life
             <h3 class="text-base font-bold md:mb-4 md:hidden">
                 Doctors listed according to regions
             </h3>
+          
+            
          </div>
+      
         </div>
         <div>
             <h3 class="hidden md-4 text-lg font-bold md:block">
@@ -136,8 +154,14 @@ Service providers For Life
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa nam aspernatur, necessitatibus pariatur tenetur quasi, commodi, illum iure odit reiciendis eaque earum. Incidunt, ea 
                 accusantium totam dicta dolore error sunt?
             </p>
+            <div class="flex justify-center md:justify-start pt-3">
+              <a href="{% url 'doctor-region' %}" class="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight">
+                  View Regions
+              </a>
+          </div>
 
         </div>
+      
         </div>
         <!-- List Item 2 -->
         <div class="flex flex-col space-y-3 md:space-y-0 
@@ -164,6 +188,11 @@ Service providers For Life
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa nam aspernatur, necessitatibus pariatur tenetur quasi, commodi, illum iure odit reiciendis eaque earum. Incidunt, ea 
                 accusantium totam dicta dolore error sunt?
             </p>
+            <div class="flex justify-center md:justify-start pt-3">
+              <a href="" class="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight">
+                  View Doctors
+              </a>
+          </div>
 
         </div>
         </div>

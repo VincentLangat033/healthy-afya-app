@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'members',
+    'static',
 ]
 TAILWIND_APP_NAME = 'theme'
 
@@ -81,23 +82,23 @@ WSGI_APPLICATION = 'afyaapp.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bookingapp',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'golden@254Kim'
-        
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bookingapp',
+#         'HOST': 'localhost',
+#         'USER': 'root',
+#         'PASSWORD': 'golden@254Kim'
+        
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -135,6 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'theme/static/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

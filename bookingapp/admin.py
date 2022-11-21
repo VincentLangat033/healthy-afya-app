@@ -19,21 +19,26 @@ from . import models
 #         if self.value() == '<10':
 #             return queryset.filter(inventory__lt=10)
 
+@admin.register(models.County)
+class CountyAdmin(admin.ModelAdmin):
+    list_display = ['county']
+    # list_editable = ['county']
+    list_per_page = 10
+
 
 @admin.register(models.Patient)
 class PatientAdmin(admin.ModelAdmin):
-    # autocomplete_fields = ['first_name']
-    # prepopulated_fields = {
-    #     'slug': ['first_name']
-    # }
-    # actions = ['clear_inventory']
-    list_display = ['first_name', 'last_name', 'age',
-                     'email', 'phone'
-    ]
-    list_editable = [ 'age']
-    list_per_page = 10
-    # list_select_related = ['collection']
-    search_fields = ['first_name']
+
+    list_display = ['username',
+                     'gender', 'phone' ]
+
+    def username(self, obj):
+        return obj.user.username
+    # ]
+    # list_editable = [ 'age']
+    # list_per_page = 10
+    # # list_select_related = ['collection']
+    # search_fields = ['first_name']
 
     # def patient_titl(self, product):
     #     return product.collection.title
@@ -57,11 +62,13 @@ class PatientAdmin(admin.ModelAdmin):
 
 @admin.register(models.Doctor)
 class DoctoAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name',  'email', 'phone', 'age']
+    list_display = ['username', 'phone', 'age']
     list_editable = ['age']
     list_per_page = 10
-    ordering = ['first_name', 'last_name']
-    search_fields = ['first_name__istartswith', 'last_name__istartswith']
+    def username(self, obj):
+        return obj.user.username
+    # ordering = ['first_name', 'last_name']
+    # search_fields = ['first_name__istartswith', 'last_name__istartswith']
 
     # @admin.display(ordering='orders_count')
     # def orders(self, customer):
