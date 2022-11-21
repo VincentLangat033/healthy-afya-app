@@ -15,10 +15,11 @@ def doctor_region(request):
     doctor_region = County.objects.all()
     return render(request, 'doctor/regions.html',{'doctor_region': doctor_region})
 
-def region(request, id):
-    county_id = id
-    county = County.objects.get(pk=county_id)
-    return render(request, 'doctor/region.html', {'county': county})
+def patient_dashboard(request):
+    return render(request, 'patient/patient_dashboard.html')
+
+def region(request):
+    return render(request, 'doctor/region.html')
 
 
 
