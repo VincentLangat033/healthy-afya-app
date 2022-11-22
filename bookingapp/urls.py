@@ -14,7 +14,7 @@ urlpatterns = [
     # Doctor routes base_doctor
     path('doctor/', views.base_doctor, name= 'base-doctor'),
     path('doctor/dashboard', views.doctor_dashboard, name= 'doctor-dashboard'),
-    path('doctor/dashboard/doctor-schedule/<doctor_id>', views.doctor_schedule, name= 'doctor-schedule'),
+    path('doctor/dashboard/doctor-schedule/', views.doctor_schedule, name= 'doctor-schedule'),
 
 
 ]
