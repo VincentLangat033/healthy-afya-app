@@ -103,7 +103,7 @@ class Appointment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     symptoms = models.TextField(null=True)
     appointment_date = models.DateField(null=True)
-    status = models.CharField(max_length=255, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    status = models.CharField(max_length=255, choices=STATUS_CHOICES, default=PENDING)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor_info')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'user_info')
 
