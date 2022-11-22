@@ -4,6 +4,7 @@ from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from . import models
+from bookingapp.models import County, Doctor, Patient, Schedule
 
 
 # class InventoryFilter(admin.SimpleListFilter):
@@ -86,3 +87,8 @@ class DoctorAdmin(admin.ModelAdmin):
     #     )
 
 
+
+@admin.register(models.Schedule)
+class ScheduleAdmin(admin.ModelAdmin):
+    model = County
+    list_display = ['id', 'doctor']
