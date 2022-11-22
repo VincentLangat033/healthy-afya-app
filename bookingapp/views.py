@@ -41,6 +41,17 @@ def view_doctor_by_county(request, county_id):
     return render(request, 'patient/doctor_by_county.html', { 'county_doctor': county_doctor })
 
 
+# DOctor side
+
+def base_doctor(request):
+    return render( request, 'doctor/base.html')
+
+
+
+
+
+
+
 
 def show_county(request, county_id):
     county = County.objects.get(pk=county_id)

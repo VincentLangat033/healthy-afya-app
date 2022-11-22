@@ -11,6 +11,10 @@ urlpatterns = [
     path('patient/dashboard/content/book-appointment', views.book_appointment, name= 'book-appointment'),
     path('patient/dashboard/content/doctor-by-county/<county_id>', views.view_doctor_by_county, name= 'doctor-by-county'),
 
+    # Doctor routes base_doctor
+    path('doctor/', views.base_doctor, name= 'base-doctor'),
+
+
 ]
 
 
