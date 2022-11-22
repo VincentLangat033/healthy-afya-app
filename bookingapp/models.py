@@ -85,3 +85,27 @@ class Address(models.Model):
         Patient, on_delete=models.CASCADE)
 
 
+class Appointment(models.Model):
+    PENDING = 'Pending'
+    APPROVED = 'Approved'
+    REJECTED = 'Rejected'
+    COMPLETED = 'Completed'
+    CANCELLED = 'Cancelled'
+
+    STATUS_CHOICES = [
+        (PENDING, 'Pending'),
+        (APPROVED, 'Approved'),
+        (REJECTED, 'Rejected'),
+        (COMPLETED, 'Completed'),
+        (CANCELLED, 'Cancelled'),
+    ]
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    symptoms = models.TextField(null=True)
+    appointment_date = models.DateField(null=True)
+    status = models.CharField(max_length=255, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor_info')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'user_info')
+
+    def __str__(self):
+        return f'Appointment {self.created_at}'
