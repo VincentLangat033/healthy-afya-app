@@ -68,6 +68,7 @@ class Doctor(models.Model):
     phone = models.CharField(max_length=255)
     county = models.ForeignKey(County, on_delete=models.CASCADE, null=True)
     specialization = models.CharField(max_length=50,choices=SPECIALIZATION_CHOICES , null=True)
+    biography = models.TextField(null=True, default='-')   
     birth_date = models.DateField(null=True, blank=True)
     has_schedule = models.BooleanField(default=False)
     last_update = models.DateTimeField(auto_now = True)
