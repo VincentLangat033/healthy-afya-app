@@ -13,10 +13,13 @@
 </head>
 <body>
     {% for doctor in county_doctor %}
+    <table>
+        
     <div class="relative container mx-auto p-6">
         <div class="flex space-x-6 p-6"> 
-    <li class="flex items-center justify-between"> <a href="">{{ doctor }} </a></li>
-    <li class="flex items-center justify-between"> {{ doctor.phone }}</li>
+            
+    <li class="flex items-center justify-between"> <a href="">{{ doctor.user.first_name }} </a></li>
+    <li class="flex items-center justify-between"> {{ doctor.biography }}</li>
     <li class="flex items-center justify-between"> {{ doctor.phone }}</li>
     <a href="" class="p-3 px-6 pt-2 text-white bg-brightRed rounded baseline hover:bg-brightRedLight">
         Book This Doctor
@@ -25,6 +28,7 @@
    </div>
 
 </div>
+</table>
     {% endfor %}
 </body>
 </html>
