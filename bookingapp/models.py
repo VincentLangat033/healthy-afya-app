@@ -69,8 +69,10 @@ class Doctor(models.Model):
     county = models.ForeignKey(County, on_delete=models.CASCADE, null=True)
     specialization = models.CharField(max_length=50,choices=SPECIALIZATION_CHOICES , null=True)
     birth_date = models.DateField(null=True, blank=True)
+    has_schedule = models.BooleanField(default=False)
     last_update = models.DateTimeField(auto_now = True)
     created_at = models.DateTimeField(auto_now_add = True)
+
     # def __str__(self):
     #     return f'{self.first_name} {self.last_name}'
 
