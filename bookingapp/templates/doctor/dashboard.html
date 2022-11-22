@@ -1,3 +1,6 @@
+{% extends 'doctor/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -141,7 +144,7 @@
       <div class="market-update-block clr-block-1">
         <div class="col-md-8 market-update-left">
           <h3>{{appointmentcount}}</h3>
-          <h4>Appointments</h4>
+          <h4>View Appointments</h4>
         </div>
         <div class="col-md-4 market-update-right">
           <i class="fa fa-calendar"> </i>
@@ -153,7 +156,7 @@
       <div class="market-update-block clr-block-2">
         <div class="col-md-8 market-update-left">
           <h3>{{patientcount}}</h3>
-          <h4>Patient Under You</h4>
+          <h4>Update My Profile</h4>
 
         </div>
         <div class="col-md-4 market-update-right">
@@ -165,8 +168,7 @@
     <div class="col-md-4 market-update-gd">
       <div class="market-update-block clr-block-3">
         <div class="col-md-8 market-update-left">
-          <h3>{{patientdischarged}}</h3>
-          <h4>Discharged Patient</h4>
+          <h4>Create Schedule</h4>
         </div>
         <div class="col-md-4 market-update-right">
           <i class="fa fa-check-circle-o" aria-hidden="true"></i>
@@ -180,3 +182,5 @@
 
 
 </html>
+
+{% endblock %}

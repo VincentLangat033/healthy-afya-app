@@ -49,6 +49,13 @@ def base_doctor(request):
 def doctor_dashboard(request):
     return render( request, 'doctor/dashboard.html')
 
+def doctor_schedule(request, doctor_id):
+    doctor_schedule = Doctor.objects.get(pk=doctor_id)
+    return render(request, 'doctor/schedule.html', {'doctor_schedule': doctor_schedule})
+
+
+
+
 
 
 
