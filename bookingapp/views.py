@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import  messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm, RegisterDoctorForm
-from .models import Patient, County, Doctor, Appointment
+from .models import Patient, County, Doctor, Appointment, Schedule
 
 
 @login_required(login_url='/members/login_user/')
@@ -38,6 +38,7 @@ def view_doctor_by_county(request, county_id):
     #     'doctor_list': county_doctor, 
         
     #     }
+    # print(county_doctor)
     return render(request, 'patient/doctor_by_county.html', { 'county_doctor': county_doctor })
 
 
@@ -49,9 +50,16 @@ def base_doctor(request):
 def doctor_dashboard(request):
     return render( request, 'doctor/dashboard.html')
 
-def doctor_schedule(request, doctor_id):
-    doctor_schedule = Doctor.objects.get(pk=doctor_id)
-    return render(request, 'doctor/schedule.html', {'doctor_schedule': doctor_schedule})
+def doctor_schedule(request):
+    # doctor_schedule = Doctor.objects.get(pk=doctor_id)
+    current_user = request.user
+    user=current_user
+    print(user)
+    # doctor_schedule = Doctor.objects.get()
+    doctor = Doctor.objects.get(user=user)
+    schedule = Schedule.objects.get(doctor=doctor)
+    print(doctor_schedule)
+    return render(request, 'doctor/schedule.html', {'doctor': doctor, 'schedule': schedule})
 
 
 
