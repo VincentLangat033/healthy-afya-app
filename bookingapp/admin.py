@@ -61,7 +61,7 @@ class PatientAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Doctor)
-class DoctoAdmin(admin.ModelAdmin):
+class DoctorAdmin(admin.ModelAdmin):
     list_display = ['username', 'phone', 'age']
     list_editable = ['age']
     list_per_page = 10

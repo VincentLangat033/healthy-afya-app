@@ -71,8 +71,8 @@ class Doctor(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     last_update = models.DateTimeField(auto_now = True)
     created_at = models.DateTimeField(auto_now_add = True)
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+    # def __str__(self):
+    #     return f'{self.first_name} {self.last_name}'
 
     # class Meta:
     #     ordering = ['first_name', 'last_name']
