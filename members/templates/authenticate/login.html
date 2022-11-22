@@ -5,6 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+
+    <style type="text/css">
+      body {
+        color: #aa082e;
+        background-color: #b6bde7;
+        font-family: 'Roboto', sans-serif;
+      }
+  
+      a:link {
+        text-decoration: none;
+      }
+  
+      .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, hsl(12, 88%, 59%), hsl(12, 88%, 59%));
+        color: #fff;
+        font-weight: bold;
+        line-height: 50px;
+      }
+  
+      .form-content {
+        padding: 5%;
+        border: 1px solid #ced4da;
+        margin-bottom: 2%;
+      }
+  
+      .form-control {
+        border-radius: 1.5rem;
+      }
+  
+      .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 1%;
+        width: 20%;
+        cursor: pointer;
+        background: #0062cc;
+        color: #fff;
+      }
+    </style>
 </head>
 <body>
     {% if messages %}
@@ -18,7 +59,7 @@
       {%endfor %}
 
     {% endif %}
-    <form action="" method="POST">
+    <!-- <form action="" method="POST">
         {% csrf_token %}
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">User Name</label>
@@ -31,6 +72,45 @@
         </div>
      
         <button type="submit" class="btn btn-primary">Submit</button>
+      </form> -->
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="container register-form">
+          <div class="form">
+            <div class="note">
+              <p>Patient Login Page</p>
+            </div>
+    
+            <div class="form-content">
+              <div class="row">
+                <div class="col-md-6">
+    
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="form-label">User Name</label>
+                    <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                  </div> <br><br>
+    
+                </div>
+                <!--  render_field form.password class="form-control" placeholder="Password"  -->
+                <div class="col-md-6">
+    
+                  <div class="form-group">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
+                    <br>
+
+                  </div>
+    
+                </div>
+              </div>
+              <br>
+              <button type="submit" class="btnSubmit">Login</button> <br>
+              <div class="text-center">Do not have account? <a href="patientsignup">Signup here</a></div>
+            </div>
+          </div>
+        </div>
+    
       </form>
     
 </body>
