@@ -1,0 +1,31 @@
+{% extends 'patient/dashboard.html' %}
+{% load tailwind_tags %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
+    <title>Document</title>
+</head>
+<body>
+    {% for doctor in county_doctor %}
+    <div class="relative container mx-auto p-6">
+        <div class="flex space-x-6 p-6"> 
+    <li class="flex items-center justify-between"> <a href="">{{ doctor }} </a></li>
+    <li class="flex items-center justify-between"> {{ doctor.phone }}</li>
+    <li class="flex items-center justify-between"> {{ doctor.phone }}</li>
+    <a href="" class="p-3 px-6 pt-2 text-white bg-brightRed rounded baseline hover:bg-brightRedLight">
+        Book This Doctor
+    </a>
+     <!-- <button pk = {region.id} class="p-3 px-6 pt-2 text-white bg-brightRed rounded baseline hover:bg-brightRedLight" > View Doctors here</button> -->
+   </div>
+
+</div>
+    {% endfor %}
+</body>
+</html>
+{% endblock %}
