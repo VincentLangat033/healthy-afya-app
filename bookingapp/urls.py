@@ -8,6 +8,8 @@ urlpatterns = [
     path( 'show-county/<county_id>/', views.show_county, name='county'),
     path('patient/dashboard/', views.patient_dashboard, name= 'patient-dashboard'),
     path('patient/dashboard/content', views.dashboard_content, name= 'dashboard-content'),
+    path('patient/dashboard/content/book-appointment', views.book_appointment, name= 'book-appointment'),
+    path('patient/dashboard/content/doctor-by-county/<county_id>', views.view_doctor_by_county, name= 'doctor-by-county'),
 
 ]
 
