@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import  messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm, RegisterDoctorForm
-from .models import Patient, County, Doctor
+from .models import Patient, County, Doctor, Appointment
 
 
 @login_required(login_url='/members/login_user/')
@@ -20,7 +20,26 @@ def patient_dashboard(request):
 
 def dashboard_content(request):
     return render(request, 'patient/dashboard_content.html')
-    
+
+def book_appointment(request):
+    counties = County.objects.all()
+    return render(request, 'patient/book_appointment.html',{'counties': counties})
+
+@login_required(login_url='members/login_user/')
+def view_doctor_by_county(request, county_id):
+    county_doctor = Doctor.objects.filter(county=county_id).order_by('specialization')
+    # user_session = request.user
+    # user = User.objects.get(user=user_session)
+    # check_pending = Appointment.objects.filter(user=user, status='Pending').count()
+    # check_approved = Appointment.objects.filter(user=user, status='Approved').count()
+    # check_appointments = check_pending + check_approved
+    # 'check_appointments': check_appointments
+    # detail = {
+    #     'doctor_list': county_doctor, 
+        
+    #     }
+    return render(request, 'patient/doctor_by_county.html', { 'county_doctor': county_doctor })
+
 
 
 def show_county(request, county_id):
