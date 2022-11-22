@@ -13,6 +13,7 @@ urlpatterns = [
 
     # Doctor routes base_doctor
     path('doctor/', views.base_doctor, name= 'base-doctor'),
+    path('doctor/dashboard', views.doctor_dashboard, name= 'doctor-dashboard'),
 
 
 ]

@@ -46,6 +46,9 @@ def view_doctor_by_county(request, county_id):
 def base_doctor(request):
     return render( request, 'doctor/base.html')
 
+def doctor_dashboard(request):
+    return render( request, 'doctor/dashboard.html')
+
 
 
 
