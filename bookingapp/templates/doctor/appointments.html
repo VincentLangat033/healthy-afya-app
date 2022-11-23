@@ -1,0 +1,112 @@
+{% extends 'doctor/base.html' %}
+{% block title %}View Appointments{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+<section class="page--section">
+    <div class="container">
+        <h4 class="page--header">View Appointments</h4>
+    </div>
+
+    <div class="container table">
+        <h5 class="table--titles">Approved Appointments</h5>
+        <table class="t--style">
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Created At</th>
+                    <th>Specialization</th>
+                    <th>Appointment Status</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointments in approved_appointments %}
+                <tr>
+                    <td class="td-normal">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</td>
+                    <td class="td-normal">{{appointments.created_at}}</td>
+                    <td class="td-normal">{{appointments.doctor.specialization}}</td>
+                    <td class="td-normal">{{appointments.status}}</td>
+                    <td class="link-align"><a href="" class="btn--full">View</a></td>
+                    <td class="link-align"><a href="" class="btn--cancel">Cancel</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container table">
+        <h3 class="table--titles">Pending Appointments</h3>
+        <table class="t--style">
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Created At</th>
+                    <th>Specialization</th>
+                    <th>Appointment Status</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointments in pending_appointments %}
+                <tr>
+                    <td class="td-normal">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</td>
+                    <td class="td-normal">{{appointments.created_at}}</td>
+                    <td class="td-normal">{{appointments.doctor.specialization}}</td>
+                    <td class="td-normal">{{appointments.status}}</td>
+                    <td class="link-align"><a href="{% url 'healthcare:view_appointment' appointments.id %}" class="btn--full">View</a></td>
+                    <td class="link-align"><a href="{% url 'healthcare:update_appointment' appointments.id %}" class="btn--update">Update</a></td>
+                    <td class="link-align"><a href="{% url 'healthcare:cancel' appointments.id %}" class="btn--cancel">Cancel</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container table">
+        <h3 class="table--titles">Rejected Appointments</h3>
+        <table class="t--style">
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Created At</th>
+                    <th>Specialization</th>
+                    <th>Appointment Status</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointments in rejected_appointments %}
+                <tr>
+                    <td class="td-normal">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</td>
+                    <td class="td-normal">{{appointments.created_at}}</td>
+                    <td class="td-normal">{{appointments.doctor.specialization}}</td>
+                    <td class="td-normal">{{appointments.status}}</td>
+                    <td class="link-align"><a href="{% url 'healthcare:view_appointment' appointments.id %}" class="btn--full">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+    
+</body>
+</html>
+
+
+
+
+{% endblock %}
