@@ -1,0 +1,44 @@
+{% extends 'healthcare/base.html' %}
+{% block title %}Book Appointment{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<section class="section--form">
+    <div class="form--container">
+        <h2 class="page--header">Appointment Form</h2>
+        <form class="form--content" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input class="submit-btn" type="submit" value="Submit">
+        </form>
+    </div>
+</section>
+
+<h1>Book an appointment</h1>
+
+{{ filtered_schedule|json_script:"filtered_schedule" }}
+<script>
+    const filteredSchedule = JSON.parse(document.getElementById('filtered_schedule').textContent);
+    console.log(filteredSchedule)
+
+    var minDate = new Date();
+    minDate.setDate(minDate.getDate() + 1);
+    $( function() {
+        $( "#appointment_date" ).datepicker({
+        numberOfMonths:1, 
+        changeYear: true,
+        changeMonth: true,
+        dateFormat: 'yy-mm-dd',
+        minDate: minDate,
+        beforeShowDay: function(date) {
+
+            return [filteredSchedule.indexOf(date.getDay()) > -1]
+        },
+        });
+        $(".ui-datepicker").css("font-size","2em")
+    } );
+</script>
+{% endblock %}
