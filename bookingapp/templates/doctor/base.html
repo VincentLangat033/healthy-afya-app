@@ -283,9 +283,9 @@
       <h2>{{request.user.first_name}}</h2>
     </header>
     <ul>
-      <li tabindex="0" class="icon-dashboard"> <a style="color:white; text-decoration:none;" href="/doctor-dashboard"><span>Dashboard</span></a> </li>
-      <li tabindex="0" class="icon-users"> <a style="color:white; text-decoration:none;" href="/doctor-patient"><span>Patient</span></a></li>
-      <li tabindex="0" class="icon-calendar"> <a style="color:white; text-decoration:none;" href="/doctor-appointment"><span>Appointments</span></a></li>
+      <li tabindex="0" class="icon-dashboard"> <a style="color:white; text-decoration:none;" href="{% url 'doctor-dashboard' %}"><span>Dashboard</span></a> </li>
+      <li tabindex="0" class="icon-users"> <a style="color:white; text-decoration:none;" href="{% url 'view-appointments' %}"><span>Appointments</span></a></li>
+      <li tabindex="0" class="icon-calendar"> <a style="color:white; text-decoration:none;" href="{% url 'doctor-schedule' %}"><span>Schedule</span></a></li>
     </ul>
   </nav>
   <main>
@@ -299,7 +299,7 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav" style=" margin-left: 90%;">
 
-            <a href="/logout" class="nav-item nav-link">Logout</a>
+            <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
           </div>
         </div>
       </nav>
