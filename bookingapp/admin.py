@@ -4,7 +4,7 @@ from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from . import models
-from bookingapp.models import County, Doctor, Patient, Schedule
+from bookingapp.models import County, Doctor, Patient, Schedule, Appointment
 
 
 # class InventoryFilter(admin.SimpleListFilter):
@@ -86,7 +86,19 @@ class DoctorAdmin(admin.ModelAdmin):
     #         orders_count=Count('order')
     #     )
 
+@admin.register(models.Appointment)
+class AppointmentAdmin(admin.ModelAdmin):
+    model = Appointment
+    list_display = ['id', 'created_at', 'status', 'user_id', 'patient_name','doctor_id', 'doctor_name']
 
+    def doctor_name(self, obj):
+        return obj.doctor.user.first_name
+
+    def patient_name(self, obj):
+        return obj.user.username
+    
+    def user_id(self, obj):
+        return obj.user.id
 
 @admin.register(models.Schedule)
 class ScheduleAdmin(admin.ModelAdmin):
