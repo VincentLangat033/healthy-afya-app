@@ -107,6 +107,36 @@ def view_appointments(request):
     return render(request, 'doctor/appointments.html', context=context)
 
 
+@login_required(login_url='/members/login_user/')
+def view_all_appointments(request):
+    # user_session = request.user
+    user_status = User.objects.get(pk =request.user.pk)
+    pending_appointments = Appointment.objects.filter(user=user_status , status='Pending')
+    approved_appointments = Appointment.objects.filter(user=user_status , status='Approved')
+    rejected_appointments = Appointment.objects.filter(user=user_status , status='Rejected')
+    context = {
+        'pending_appointments': pending_appointments,
+        'approved_appointments': approved_appointments,
+        'rejected_appointments': rejected_appointments,
+        }
+    return render(request, 'patient/view_all_appointments.html', context=context)
+
+@login_required(login_url='/members/login_user/')
+def patients_appointments(request):
+    user = request.user
+    doctor = Doctor.objects.get(user=user)
+    pending_appointments = Appointment.objects.filter(doctor=doctor, status='Pending')
+    approved_appointments = Appointment.objects.filter(doctor=doctor, status='Approved')
+    rejected_appointments = Appointment.objects.filter(doctor=doctor, status='Rejected')
+    context = {
+        'pending_appointments': pending_appointments,
+        'approved_appointments': approved_appointments,
+        'rejected_appointments': rejected_appointments,
+        'doctor' : doctor,
+    }
+    return render(request, 'doctor/appointments.html', context=context)
+
+
 
 
 
