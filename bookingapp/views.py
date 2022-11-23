@@ -6,8 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import  messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterUserForm, RegisterDoctorForm
+from .forms import RegisterUserForm, RegisterDoctorForm, BookAppointmentForm
 from .models import Patient, County, Doctor, Appointment, Schedule
+from .utility import appointment_availability
 
 
 @login_required(login_url='/members/login_user/')
@@ -41,6 +42,35 @@ def view_doctor_by_county(request, county_id):
     # print(county_doctor)
     return render(request, 'patient/doctor_by_county.html', { 'county_doctor': county_doctor })
 
+def appointment_form(request, doctor_id):
+    schedule_data = {}
+    doctor_id = id
+    user_data = request.user
+    current_user = user_data.id
+    print(user_data)
+    user = User.objects.get(id=user_data)
+    doctor = Doctor.objects.get(id=doctor_id)
+    form = BookAppointmentForm(request.POST)
+    if form.is_valid():
+        appointment_date = form.cleaned_data.get('appointment_date')
+        symptoms = form.cleaned_data.get('symptoms')
+        appointment_data = Appointment.objects.create(appointment_date=appointment_date, symptoms=symptoms, user=user, doctor=doctor)
+        appointment_data.save()
+        return render(request, 'patient/dashboard.html')
+    else:
+        form = BookAppointmentForm()
+    doctor_schedule = Schedule.objects.get(doctor=doctor)
+    schedule_data['monday'] = doctor_schedule.monday
+    schedule_data['tuesday'] = doctor_schedule.tuesday
+    schedule_data['wednesday'] = doctor_schedule.wednesday
+    schedule_data['thursday'] = doctor_schedule.thursday
+    schedule_data['friday'] = doctor_schedule.friday
+    schedule_data['saturday'] = doctor_schedule.saturday
+    schedule_data['sunday'] = doctor_schedule.sunday
+    filtered_schedule = appointment_availability(schedule_data)
+    context = {'form': form, 'filtered_schedule': filtered_schedule}
+    return render(request, 'patient/appointment_form.html', context=context)
+
 
 # DOctor side
 
@@ -60,6 +90,20 @@ def doctor_schedule(request):
     schedule = Schedule.objects.get(doctor=doctor)
     print(doctor_schedule)
     return render(request, 'doctor/schedule.html', {'doctor': doctor, 'schedule': schedule})
+
+@login_required(login_url='/members/login_user/')
+def view_appointments(request):
+    # user_session = request.user
+    user_status = User.objects.get(pk =request.user.pk)
+    pending_appointments = Appointment.objects.filter(user=user_status , status='Pending')
+    approved_appointments = Appointment.objects.filter(user=user_status , status='Approved')
+    rejected_appointments = Appointment.objects.filter(user=user_status , status='Rejected')
+    context = {
+        'pending_appointments': pending_appointments,
+        'approved_appointments': approved_appointments,
+        'rejected_appointments': rejected_appointments,
+        }
+    return render(request, 'doctor/appointments.html', context=context)
 
 
 

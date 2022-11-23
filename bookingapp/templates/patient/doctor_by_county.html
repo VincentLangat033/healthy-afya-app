@@ -21,7 +21,7 @@
     <li class="flex items-center justify-between"> <a href="">{{ doctor.user.first_name }} </a></li>
     <li class="flex items-center justify-between"> {{ doctor.biography }}</li>
     <li class="flex items-center justify-between"> {{ doctor.phone }}</li>
-    <a href="" class="p-3 px-6 pt-2 text-white bg-brightRed rounded baseline hover:bg-brightRedLight">
+    <a href="{% url 'appointment-form' doctor.id  %}" class="p-3 px-6 pt-2 text-white bg-brightRed rounded baseline hover:bg-brightRedLight">
         Book This Doctor
     </a>
      <!-- <button pk = {region.id} class="p-3 px-6 pt-2 text-white bg-brightRed rounded baseline hover:bg-brightRedLight" > View Doctors here</button> -->

@@ -26,7 +26,12 @@ def register_user(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, ("Registration succesful"))
-            return redirect('home')
+            if user.is_super_user:
+                return redirect('patient/dashboard')
+            else:
+                return redirect('home')
+
+            
 
     else:
         form = RegisterUserForm()
@@ -60,7 +65,14 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            if user.is_superuser:
+                return redirect('home')
+            # elif :
+            #     return redirect('/doctor/dashboard') 
+            else:
+                return redirect('/patient/dashboard/content')
+
+               
             # Redirect to a success page.
             ...
         else:
