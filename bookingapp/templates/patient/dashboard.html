@@ -100,7 +100,9 @@
     }
 
     .menu {
-      background: #5bc995;
+      background: #497174; 
+      {% comment %} 5bc995 {% endcomment %}
+      
       height: 100vh;
       width: 240px;
       position: fixed;
@@ -287,21 +289,22 @@
       <li tabindex="0" class="icon-calendar"> <a style="color:white; text-decoration:none;" href="{% url 'book-appointment' %}"><span>Book Appointment</span></a></li>
       <li tabindex="0" class="icon-calendar"> <a style="color:white; text-decoration:none;" href="{% url 'book-appointment' %}"><span>View Doctors</span></a></li>
       <li tabindex="0" class="icon-calendar"> <a style="color:white; text-decoration:none;" href="{% url 'book-appointment' %}"><span>Leave a Review</span></a></li>
-      <li tabindex="0" class="icon-users"> <a style="color:white; text-decoration:none;" href="/patient-discharge"><span>My appointments</span></a></li>
+      <li tabindex="0" class="icon-users"> <a style="color:white; text-decoration:none;" href="{% url 'view-_all-appointments' %} "><span>My appointments</span></a></li>
     </ul>
   </nav>
   <main>
     <!-- nav start -->
     <div class="bs-example">
-      <nav class="navbar navbar-expand-md  navbar-dark fixed-top" style="background:#337AB7;">
-        <a href="/patient-dashboard" class="navbar-brand">HOSPITAL MANAGEMENT</a>
+      {% comment %} background:#337AB7; {% endcomment %}
+      <nav class="navbar navbar-expand-md  navbar-dark fixed-top" style="background:#497174;">
+        <a href="#" class="navbar-brand">HEALTHY AFYA-APP</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav" style=" margin-left: 90%;">
 
-            <a href="/logout" class="nav-item nav-link">Logout</a>
+            <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
           </div>
         </div>
       </nav>
