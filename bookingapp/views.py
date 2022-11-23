@@ -44,12 +44,13 @@ def view_doctor_by_county(request, county_id):
 
 def appointment_form(request, doctor_id):
     schedule_data = {}
-    doctor_id = id
+    pk = doctor_id
     user_data = request.user
     current_user = user_data.id
     print(user_data)
-    user = User.objects.get(id=user_data)
-    doctor = Doctor.objects.get(id=doctor_id)
+    # user = User.objects.get(id=user_data)
+    user = User.objects.get(pk=request.user.pk)
+    doctor = Doctor.objects.get(id=pk)
     form = BookAppointmentForm(request.POST)
     if form.is_valid():
         appointment_date = form.cleaned_data.get('appointment_date')

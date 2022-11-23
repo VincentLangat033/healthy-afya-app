@@ -1,44 +1,71 @@
-{% extends 'healthcare/base.html' %}
+{% extends 'patient/dashboard.html' %}
 {% block title %}Book Appointment{% endblock %}
 {% block content %}
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .section--form{
+            height: 500px;
+            
+        }
+        .form--container{
+            margin-top: 150px;
+        }
+    
+    </style>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<section class="section--form">
-    <div class="form--container">
-        <h2 class="page--header">Appointment Form</h2>
-        <form class="form--content" method="post">
-            {% csrf_token %}
-            {{form}}
-            <input class="submit-btn" type="submit" value="Submit">
-        </form>
-    </div>
-</section>
+</head>
+<body>
+    <br>
+    <section class="section--form">
+        <div class="form--container">
+            <h5 class="page--header">Appointment Form</h5>
+            <form class="form--content" method="post">
+                {% csrf_token %}
+                {{form}}
+                <input class="submit-btn" type="submit" value="Submit">
+            </form>
+        </div>
+    </section>
+    
+    <h3>Book an appointment</h3>
+    
+    {{ filtered_schedule|json_script:"filtered_schedule" }}
+    <script>
+        const filteredSchedule = JSON.parse(document.getElementById('filtered_schedule').textContent);
+        console.log(filteredSchedule)
+    
+        var minDate = new Date();
+        minDate.setDate(minDate.getDate() + 1);
+        $( function() {
+            $( "#appointment_date" ).datepicker({
+            numberOfMonths:1, 
+            changeYear: true,
+            changeMonth: true,
+            dateFormat: 'yy-mm-dd',
+            minDate: minDate,
+            beforeShowDay: function(date) {
+    
+                return [filteredSchedule.indexOf(date.getDay()) > -1]
+            },
+            });
+            $(".ui-datepicker").css("font-size","2em")
+        } );
+    </script>
+    
+</body>
+</html>
 
-<h1>Book an appointment</h1>
 
-{{ filtered_schedule|json_script:"filtered_schedule" }}
-<script>
-    const filteredSchedule = JSON.parse(document.getElementById('filtered_schedule').textContent);
-    console.log(filteredSchedule)
 
-    var minDate = new Date();
-    minDate.setDate(minDate.getDate() + 1);
-    $( function() {
-        $( "#appointment_date" ).datepicker({
-        numberOfMonths:1, 
-        changeYear: true,
-        changeMonth: true,
-        dateFormat: 'yy-mm-dd',
-        minDate: minDate,
-        beforeShowDay: function(date) {
 
-            return [filteredSchedule.indexOf(date.getDay()) > -1]
-        },
-        });
-        $(".ui-datepicker").css("font-size","2em")
-    } );
-</script>
 {% endblock %}
