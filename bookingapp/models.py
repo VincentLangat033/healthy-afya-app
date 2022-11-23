@@ -11,7 +11,7 @@ class County(models.Model):
 
     COUNTY_OPTIONS = [
         (NBI, 'Nairobi'),
-        (NKR, 'Mombasa'),
+        (MSA, 'Mombasa'),
          (NKR, 'Nakuru'),
         (KSM, 'Kisumu'),
     ]
@@ -73,6 +73,9 @@ class Doctor(models.Model):
     has_schedule = models.BooleanField(default=False)
     last_update = models.DateTimeField(auto_now = True)
     created_at = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return self.user.first_name
 
     # def __str__(self):
     #     return f'{self.first_name} {self.last_name}'
