@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from django.forms import ModelForm
+from .models import Appointment, Schedule 
 
 
 class RegisterUserForm(UserCreationForm):
@@ -39,3 +41,46 @@ class RegisterDoctorForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'phone', 'gender', 'birth_date', 'first_name', 'last_name', 'email', 'password1', 'password2')
+
+
+
+class BookAppointmentForm(ModelForm):
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field', 'placeholder': 'Enter Date', 'autocomplete': 'off'}), required=True)
+    symptoms = forms.Textarea()
+
+    class Meta:
+        model = Appointment
+        fields = ['appointment_date', 'symptoms']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['symptoms'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})
+
+
+class CreateScheduleForm(ModelForm):
+    STATUS_CHOICE = [
+        ('Available', 'Available'),
+        ('Unavailable', 'Unavailable'),
+    ]
+
+    monday = forms.CharField(label='Monday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    tuesday = forms.CharField(label='Tuesday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    wednesday = forms.CharField(label='Wednesday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    thursday = forms.CharField(label='Thursday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    friday = forms.CharField(label='Friday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    saturday = forms.CharField(label='Saturday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    sunday = forms.CharField(label='Sunday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+
+    class Meta:
+        model = Schedule
+        fields = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['monday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['tuesday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['wednesday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['thursday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['friday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['saturday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['sunday'].widget.attrs.update({'class': 'input-field'})
