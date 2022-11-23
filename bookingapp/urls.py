@@ -11,12 +11,14 @@ urlpatterns = [
     path('patient/dashboard/content/book-appointment', views.book_appointment, name= 'book-appointment'),
     path('patient/dashboard/content/doctor-by-county/<county_id>', views.view_doctor_by_county, name= 'doctor-by-county'),
     path('patient/dashboard/appointment-form/<doctor_id>', views.appointment_form, name= 'appointment-form'),
+    path('view_all_appointments/', views.view_all_appointments, name='view-_all-appointments'),
 
     # Doctor routes base_doctor
     path('doctor/', views.base_doctor, name= 'base-doctor'),
     path('doctor/dashboard', views.doctor_dashboard, name= 'doctor-dashboard'),
     path('doctor/dashboard/doctor-schedule/', views.doctor_schedule, name= 'doctor-schedule'),
     path('view_appointments/', views.view_appointments, name='view-appointments'),
+    path('patients_appointments/', views.patients_appointments, name='patient-appointments'),
 
 
 ]
