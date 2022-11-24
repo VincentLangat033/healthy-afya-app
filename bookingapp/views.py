@@ -137,6 +137,10 @@ def patients_appointments(request):
     return render(request, 'doctor/appointments.html', context=context)
 
 
+def patient_reviews(request):
+    return render(request, 'patient/review.html')
+
+
 
 
 
