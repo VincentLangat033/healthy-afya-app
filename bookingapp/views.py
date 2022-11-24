@@ -140,6 +140,10 @@ def patients_appointments(request):
 def patient_reviews(request):
     return render(request, 'patient/review.html')
 
+def all_doctors(request):
+    doctor = Doctor.objects.all()
+    return render(request, 'patient/doctors.html', {'doctor': doctor})
+
 
 
 
