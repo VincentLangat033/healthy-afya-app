@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm, RegisterDoctorForm, BookAppointmentForm
 from .models import Patient, County, Doctor, Appointment, Schedule
 from .utility import appointment_availability
+from .decorators import unauthenticated_user
 
 
 @login_required(login_url='/members/login_user/')
@@ -170,33 +171,31 @@ def region(request):
     return render(request, 'doctor/region.html')
 
 
-
-def register_user(request):
-    if request.method == "POST":
-        form = RegisterUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            phone = form.cleaned_data.get('phone')
-            gender = form.cleaned_data.get('gender')
-            birth_date = form.cleaned_data.get('birth_date')
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data.get('last_name')
-            user = User.objects.get(username=username)
-            print(user.username)
-            print(user.first_name)
-            user_data = Patient.objects.create(user=user, phone=phone, gender=gender, birth_date=birth_date)
-            user_data.save()
-
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            messages.success(request, ("Registration succesful"))
-            return redirect('home')
-
-    else:
+@unauthenticated_user
+def register_patient(request):
         form = RegisterUserForm()
-    return render(request,'home/register_patient.html', {'form': form} )
+        if request.method == "POST":
+            form = RegisterUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password1']
+                phone = form.cleaned_data.get('phone')
+                gender = form.cleaned_data.get('gender')
+                birth_date = form.cleaned_data.get('birth_date')
+                first_name = form.cleaned_data.get('first_name')
+                last_name = form.cleaned_data.get('last_name')
+                user = User.objects.get(username=username)
+                print(user.username)
+                print(user.first_name)
+                user_data = Patient.objects.create(user=user, phone=phone, gender=gender, birth_date=birth_date)
+                user_data.save()
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                messages.success(request, ("Registration succesful"))
+                return redirect('home')
+        else:            
+            return render(request,'home/register_patient.html', {'form': form} )
 
 
 def register_user(request):
