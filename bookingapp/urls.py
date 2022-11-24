@@ -13,6 +13,7 @@ urlpatterns = [
     path('patient/dashboard/appointment-form/<doctor_id>', views.appointment_form, name= 'appointment-form'),
     path('view_all_appointments/', views.view_all_appointments, name='view-_all-appointments'),
     path('patient_reviews/', views.patient_reviews, name='patient-reviews'),
+    path('all_doctors/', views.all_doctors, name='all-doctors'),
 
     # Doctor routes base_doctor
     path('doctor/', views.base_doctor, name= 'base-doctor'),
