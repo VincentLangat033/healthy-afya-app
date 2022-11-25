@@ -31,7 +31,7 @@ def home_redirect(view_func):
         if request.user.groups.exists():
             group = request.user.groups.all()[0].name
         if group == 'patient':
-            return redirect('patient-dashboard')
+            return redirect('dashboard-content')
         if group == 'doctors':
             return redirect('doctor-dashboard')
         if group == 'admin':
