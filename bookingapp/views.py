@@ -204,7 +204,6 @@ def register_patient(request):
             return render(request,'home/register_patient.html', {'form': form} )
 
 @unauthenticated_user
-@home_redirect
 def register_user(request):
     if request.method == "POST":
         form = RegisterDoctorForm(request.POST)
