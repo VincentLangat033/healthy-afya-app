@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import  messages
 from django.contrib.auth.forms import UserCreationForm
@@ -70,13 +70,23 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            if user.is_superuser:
+            # if user.is_superuser:
+            #     return redirect('home')
+            # # elif :
+            # #     return redirect('/doctor/dashboard') 
+            # else:
+            #     return redirect('/patient/dashboard/content')
+            group = None
+            if request.user.groups.exists():
+                group = request.user.groups.all()[0].name
+            if group == 'patient':
+                return redirect('dashboard-content')
+            if group == 'doctors':
+                return redirect('doctor-dashboard')
+            if group == 'admin':
                 return redirect('home')
-            # elif :
-            #     return redirect('/doctor/dashboard') 
             else:
-                return redirect('/patient/dashboard/content')
-
+                return redirect('home')
                
             # Redirect to a success page.
             ...
