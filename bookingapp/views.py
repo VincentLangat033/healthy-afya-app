@@ -197,7 +197,7 @@ def register_patient(request):
         else:            
             return render(request,'home/register_patient.html', {'form': form} )
 
-
+@unauthenticated_user
 def register_user(request):
     if request.method == "POST":
         form = RegisterDoctorForm(request.POST)
