@@ -180,9 +180,10 @@ def register_patient(request):
         if request.method == "POST":
             form = RegisterUserForm(request.POST)
             if form.is_valid():
-                user = form.save()
-                group = Group.objects.get(name='patient')
-                user.groups.add(group)
+                form.save()
+                # user = form.save()
+                # group = Group.objects.get(name='patient')
+                # user.groups.add(group)
                 username = form.cleaned_data['username']
                 password = form.cleaned_data['password1']
                 phone = form.cleaned_data.get('phone')
@@ -208,7 +209,9 @@ def register_user(request):
     if request.method == "POST":
         form = RegisterDoctorForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = Group.objects.get(name='doctors')
+            user.groups.add(group)
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             phone = form.cleaned_data.get('phone')
