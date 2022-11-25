@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import  messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
-from bookingapp.decorators import unauthenticated_user
+from bookingapp.decorators import unauthenticated_user, home_redirect
 
 
 @unauthenticated_user
@@ -62,6 +62,7 @@ def register_user(request):
     #     return render(request,'authenticate/register_user.html', {'form': form} )
 
 @unauthenticated_user
+@home_redirect
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
