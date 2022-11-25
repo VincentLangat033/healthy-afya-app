@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import  messages
@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm, RegisterDoctorForm, BookAppointmentForm
 from .models import Patient, County, Doctor, Appointment, Schedule
 from .utility import appointment_availability
-from .decorators import unauthenticated_user, allowed_users
+from .decorators import unauthenticated_user, allowed_users, home_redirect
 
 
 @login_required(login_url='/members/login_user/')
@@ -174,12 +174,15 @@ def region(request):
 
 
 @unauthenticated_user
+@home_redirect
 def register_patient(request):
         form = RegisterUserForm()
         if request.method == "POST":
             form = RegisterUserForm(request.POST)
             if form.is_valid():
-                form.save()
+                user = form.save()
+                group = Group.objects.get(name='patient')
+                user.groups.add(group)
                 username = form.cleaned_data['username']
                 password = form.cleaned_data['password1']
                 phone = form.cleaned_data.get('phone')
@@ -200,6 +203,7 @@ def register_patient(request):
             return render(request,'home/register_patient.html', {'form': form} )
 
 @unauthenticated_user
+@home_redirect
 def register_user(request):
     if request.method == "POST":
         form = RegisterDoctorForm(request.POST)
