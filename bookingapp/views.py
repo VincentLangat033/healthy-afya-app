@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm, RegisterDoctorForm, BookAppointmentForm
 from .models import Patient, County, Doctor, Appointment, Schedule
 from .utility import appointment_availability
-from .decorators import unauthenticated_user
+from .decorators import unauthenticated_user, allowed_users
 
 
 @login_required(login_url='/members/login_user/')
@@ -79,6 +79,8 @@ def appointment_form(request, doctor_id):
 def base_doctor(request):
     return render( request, 'doctor/base.html')
 
+@login_required(login_url='members/login_user/')
+@allowed_users(allowed_roles=['doctors'])
 def doctor_dashboard(request):
     return render( request, 'doctor/dashboard.html')
 
