@@ -84,3 +84,22 @@ class CreateScheduleForm(ModelForm):
         self.fields['friday'].widget.attrs.update({'class': 'input-field'})
         self.fields['saturday'].widget.attrs.update({'class': 'input-field'})
         self.fields['sunday'].widget.attrs.update({'class': 'input-field'})
+
+
+
+class ApproveAppointmentForm(ModelForm):
+    STATUS_CHOICE = [
+        ('Approved', 'Approved'),
+    ]
+    YEARS= [x for x in range(2022,2040)]
+
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field', 'autocomplete': 'off'}), required=True)
+    status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    
+    class Meta:
+        model = Appointment
+        fields = ['appointment_date', 'status']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].widget.attrs.update({'class': 'input-field'})
