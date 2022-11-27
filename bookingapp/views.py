@@ -147,6 +147,11 @@ def all_doctors(request):
     doctor = Doctor.objects.all()
     return render(request, 'patient/doctors.html', {'doctor': doctor})
 
+def view_appointment(request, appointment_id):
+    appointment_data = Appointment.objects.get(id=appointment_id)
+    context = {'appointment_data': appointment_data}
+    return render(request, 'doctor/view_appointment.html', context=context)
+
 def approve_appointment(request, appointment_id):
     appointment_data = Appointment.objects.get(id=appointment_id)
     doctor_data = {}
@@ -186,6 +191,8 @@ def reject_appointment(request, appointment_id):
         return redirect('doctor-dashboard')
     context = {'form': form}
     return render(request, 'doctor/reject_appointment.html', context=context)
+
+
 
 
 

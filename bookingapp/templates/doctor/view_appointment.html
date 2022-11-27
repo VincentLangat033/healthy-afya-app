@@ -1,0 +1,51 @@
+{% extends 'doctor/base.html' %}
+{% block title %}Appointment{% endblock %}
+{% block content %}
+
+<section class="page--section">
+    <div class="container">
+        <h2 class="page--header">Patient Appointment</h2>
+    </div>
+
+    <div class="profile--container">
+        <div class="item--row">
+            <p class="font--bold">Name:</p>
+            <p>{{appointment_data.user.first_name}} {{appointment_data.user.last_name}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Phone Number:</p>
+            <p>{{appointment_data.user.phone}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Email:</p>
+            <p>{{appointment_data.user.email}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Gender:</p>
+            <p>{{appointment_data.user.gender}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Birth Date:</p>
+            <p>{{appointment_data.user.birth_date}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Appointment Status:</p>
+            <p>{{appointment_data.status}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Date:</p>
+            <p>{{appointment_data.appointment_date}}</p>
+        </div>
+        <div class="item--head">
+            <p class="font--bold">Symptoms</p>
+        </div>
+        <div class="item--bio">
+            <p>{{appointment_data.symptoms}}</p>
+        </div>
+        <div class="item--button">
+            <a href="{{request.META.HTTP_REFERER}}" class="btn--full">Go back</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
