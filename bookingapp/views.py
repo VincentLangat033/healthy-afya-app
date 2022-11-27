@@ -147,8 +147,8 @@ def all_doctors(request):
     doctor = Doctor.objects.all()
     return render(request, 'patient/doctors.html', {'doctor': doctor})
 
-def approve_appointment(request):
-    appointment_data = Appointment.objects.get(id=id)
+def approve_appointment(request, appointment_id):
+    appointment_data = Appointment.objects.get(id=appointment_id)
     doctor_data = {}
     doctor_first_name = appointment_data.doctor.user.first_name
     doctor_last_name = appointment_data.doctor.user.last_name
@@ -161,7 +161,7 @@ def approve_appointment(request):
     if form.is_valid():
         date = form.cleaned_data.get('appointment_date')
         form.save()
-        return redirect('doctor/dashboard')
+        return redirect('doctor-dashboard')
     schedule_data = {}
     user = request.user
     doctor = Doctor.objects.get(user=user)
