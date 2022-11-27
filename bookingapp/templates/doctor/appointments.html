@@ -77,7 +77,7 @@
                         <td class="td-normal">{{appointment.status}}</td>
                         <td class="link-align"><a href="" class=" btn-25 btn--full">View</a></td>
                         <td class="link-align"><a href="{% url 'approve' appointment.id %}" class=" btn-25 btn--confirm">Approve</a></td>
-                        <td class="link-align"><a href="" class="btn-25 btn--cancel">Reject</a></td>
+                        <td class="link-align"><a href="{% url 'reject' appointment.id %}" class="btn-25 btn--cancel">Reject</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

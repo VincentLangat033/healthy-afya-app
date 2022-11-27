@@ -1,0 +1,16 @@
+{% extends 'doctor/base.html' %}
+{% block title %}Reject Appointment{% endblock %}
+{% block content %}
+
+<section class="section--form">
+    <div class="form--container">
+        <h2 class="page--header">Reject Appointment</h2>
+        <form class="form--content" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input class="submit-btn" type="submit" value="Reject">
+        </form>
+    </div>
+</section>
+
+{% endblock %}

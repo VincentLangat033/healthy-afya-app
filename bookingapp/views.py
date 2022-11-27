@@ -178,6 +178,17 @@ def approve_appointment(request, appointment_id):
     return render(request, 'doctor/approve_appointment.html', context=context)
 
 
+def reject_appointment(request, appointment_id):
+    appointment_data = Appointment.objects.get(id=appointment_id)
+    form = RejectAppointmentForm(request.POST or None, instance=appointment_data)
+    if form.is_valid():
+        form.save()
+        return redirect('doctor-dashboard')
+    context = {'form': form}
+    return render(request, 'doctor/reject_appointment.html', context=context)
+
+
+
 
 
 

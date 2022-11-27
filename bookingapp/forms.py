@@ -103,3 +103,18 @@ class ApproveAppointmentForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['status'].widget.attrs.update({'class': 'input-field'})
+
+class RejectAppointmentForm(ModelForm):
+    STATUS_CHOICE = [
+        ('Rejected', 'Rejected')
+    ]
+
+    status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+
+    class Meta:
+        model = Appointment
+        fields = ['status']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].widget.attrs.update({'class': 'input-field'})
