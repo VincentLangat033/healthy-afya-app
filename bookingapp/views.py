@@ -147,6 +147,36 @@ def all_doctors(request):
     doctor = Doctor.objects.all()
     return render(request, 'patient/doctors.html', {'doctor': doctor})
 
+def approve_appointment(request):
+    appointment_data = Appointment.objects.get(id=id)
+    doctor_data = {}
+    doctor_first_name = appointment_data.doctor.user.first_name
+    doctor_last_name = appointment_data.doctor.user.last_name
+    doctor_specialization = appointment_data.doctor.specialization
+    symptoms = appointment_data.symptoms
+    doctor_data['first_name'] = doctor_first_name
+    doctor_data['last_name'] = doctor_last_name
+    doctor_data['specialization'] = doctor_specialization
+    form = ApproveAppointmentForm(request.POST or None, instance=appointment_data)
+    if form.is_valid():
+        date = form.cleaned_data.get('appointment_date')
+        form.save()
+        return redirect('doctor/dashboard')
+    schedule_data = {}
+    user = request.user
+    doctor = Doctor.objects.get(user=user)
+    doctor_schedule = Schedule.objects.get(doctor=doctor)
+    schedule_data['monday'] = doctor_schedule.monday
+    schedule_data['tuesday'] = doctor_schedule.tuesday
+    schedule_data['wednesday'] = doctor_schedule.wednesday
+    schedule_data['thursday'] = doctor_schedule.thursday
+    schedule_data['friday'] = doctor_schedule.friday
+    schedule_data['saturday'] = doctor_schedule.saturday
+    schedule_data['sunday'] = doctor_schedule.sunday
+    filtered_schedule = appointment_availability(schedule_data)
+    context = {'form': form, 'filtered_schedule': filtered_schedule}
+    return render(request, 'doctor/approve_appointment.html', context=context)
+
 
 
 
