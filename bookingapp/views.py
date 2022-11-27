@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import  messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterUserForm, RegisterDoctorForm, BookAppointmentForm
+from .forms import *
 from .models import Patient, County, Doctor, Appointment, Schedule
 from .utility import appointment_availability
 from .decorators import unauthenticated_user, allowed_users, home_redirect
