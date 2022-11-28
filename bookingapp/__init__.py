@@ -1,3 +1,3 @@
-from bookingapp.apps import BookingappConfig
+# from bookingapp.apps import BookingappConfig
 
-default_app_config = 'bookingapp.apps.BookingappConfig'
+# default_app_config = 'bookingapp.apps.BookingappConfig'
