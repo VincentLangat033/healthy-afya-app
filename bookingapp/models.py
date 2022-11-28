@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 
 
@@ -64,7 +65,7 @@ class Doctor(models.Model):
         (NORMAL, 'Consultant'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor', null=True)
-    age = models.IntegerField()
+    age = models.IntegerField(null=True)
     phone = models.CharField(max_length=255)
     county = models.ForeignKey(County, on_delete=models.CASCADE, null=True)
     specialization = models.CharField(max_length=50,choices=SPECIALIZATION_CHOICES , null=True)
@@ -77,11 +78,22 @@ class Doctor(models.Model):
     def __str__(self):
         return self.user.first_name
 
-    # def __str__(self):
-    #     return f'{self.first_name} {self.last_name}'
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Doctor.objects.create(user=instance)
+        print("Doctor Profile Created!")
 
-    # class Meta:
-    #     ordering = ['first_name', 'last_name']
+post_save.connect(create_profile, sender=User)
+
+def update_profile(sender, instance, created, **kwargs):
+    if created == False:
+        instance.doctor.save()
+        
+        print("Doctor Profile Updated!")
+
+post_save.connect(update_profile, sender=User)
+
+
 
         
 class Address(models.Model):
