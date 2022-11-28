@@ -27,7 +27,9 @@ urlpatterns = [
     path('appointment_details/<appointment_id>',views.view_appointment, name='appointment-details'),
 
     # Forgot password URLS
-    path('reset_password/', auth_views.PasswordResetView.as_view(), name = 'reset_password'),
+    path('reset_password/', 
+    auth_views.PasswordResetView.as_view(template_name = "passwords/password_reset.html"), 
+    name = 'reset_password'),
     
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
 
