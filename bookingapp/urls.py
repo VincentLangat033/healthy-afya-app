@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from .import views
 
 urlpatterns = [
@@ -25,6 +26,16 @@ urlpatterns = [
     path('reject/<appointment_id>',views.reject_appointment, name='reject'),
     path('appointment_details/<appointment_id>',views.view_appointment, name='appointment-details'),
 
+    # Forgot password URLS
+    path('reset_password/', auth_views.PasswordResetView.as_view(), name = 'reset_password'),
+    
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+
+
 
 ]
 
@@ -32,4 +43,9 @@ urlpatterns = [
     # path('doctor/', views.doctor, name="doctor"),
     # path('doctor/region/', views.doctor_region, name= 'doctor-region'),
     # path('patient/dashboard', views.region, name= 'specific-region'),
+
+#  - Submit email form   // PasswordResetView.as_view()
+#  - Email sent success message  // PasswordResetDoneView.as_view()
+#  -Link to password Reset from in email   // PasswordResetConfirmView.as_view()
+#  - Password successfully changed message   // PasswordResetCompleteView.as_view()
     
