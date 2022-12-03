@@ -7,6 +7,7 @@ from . import models
 from bookingapp.models import County, Doctor, Patient, Schedule, Appointment
 
 
+
 # class InventoryFilter(admin.SimpleListFilter):
 #     title = 'inventory'
 #     parameter_name = 'inventory'
