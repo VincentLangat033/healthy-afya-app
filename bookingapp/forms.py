@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
-from .models import Appointment, Schedule 
+from .models import *
 
 
 class RegisterUserForm(UserCreationForm):
@@ -118,3 +118,33 @@ class RejectAppointmentForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['status'].widget.attrs.update({'class': 'input-field'})
+
+
+class DoctorApplicationForm(ModelForm):
+    SPECIALIZATION_CHOICES = [
+        ('CARD', 'Cardiologist'),
+        ('DERMA', 'Dermatologist'),
+        ('EMERGE', 'Emergency Specialist'),
+        ('ALLERGY', 'Allergy Specialist'),
+        ('ANAE', 'Anesthesiologist'),
+        ('COLON', 'COlon and Rectal Surgeon'),
+        ('NORMAL', 'Consultant'),
+    ]
+
+    STATUS_CHOICE = [
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+    ]
+
+    specialization = forms.CharField(label='Choose Specialization', widget=forms.Select(choices=SPECIALIZATION_CHOICES), required=True)
+    biography = forms.Textarea()
+
+    class Meta:
+        model = RegisterDoctor
+        fields = ['specialization', 'county', 'biography']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['specialization'].widget.attrs.update({'class': 'input-field'})
+        self.fields['county'].widget.attrs.update({'class': 'input-field',})
+        self.fields['biography'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})
