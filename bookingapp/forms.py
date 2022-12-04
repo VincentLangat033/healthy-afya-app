@@ -122,7 +122,7 @@ class RejectAppointmentForm(ModelForm):
 
 class DoctorApplicationForm(ModelForm):
     SPECIALIZATION_CHOICES = [
-        ('CARD', 'Cardiologist'),
+        ('Cardiologist', 'CARD'),
         ('DERMA', 'Dermatologist'),
         ('EMERGE', 'Emergency Specialist'),
         ('ALLERGY', 'Allergy Specialist'),

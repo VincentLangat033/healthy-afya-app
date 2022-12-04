@@ -185,6 +185,7 @@ class RegisterDoctor(models.Model):
             email_body = f'Dear Mr/Mrs {self.user.first_name} \n\n Congratulations! your application for being a doctor in afya healthcare has been approved! Kindly log in to set up your account. \n\n Regards,\n Afya Healthcare'
             # applicationEmail(self.user.email, email_header, email_body)
         elif self.status == 'Rejected':
+            
             email_header = f'Your application #{self.id} has been Rejected'
             email_body = f'Dear Mr/Mrs {self.user.first_name} \n\n Unfortunately, your application for being a doctor has been rejected. If you still wish to to join us, you can reapply after 3 months. \n\n Regards,\n Afya Healthcare'
             # applicationEmail(self.user.email, email_header, email_body)

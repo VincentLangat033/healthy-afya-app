@@ -291,7 +291,7 @@ def doctor(request):
 
 
 @login_required(login_url='/members/login_user/')
-def registerDoctor(request):
+def register_doctor(request):
     user_data = request.user
     if request.method == 'POST':
         form = DoctorApplicationForm(request.POST)
@@ -299,9 +299,9 @@ def registerDoctor(request):
             specialization = form.cleaned_data.get('specialization')
             county = form.cleaned_data.get('county')
             biography = form.cleaned_data.get('biography')
-            application_data = Doctor.objects.create(user=user_data, specialization=specialization, county=county, biography=biography)
+            application_data = RegisterDoctor.objects.create(user=user_data, specialization=specialization, county=county, biography=biography)
             application_data.save()
-            return redirect('/dashboard-content')
+            return redirect('/patient/dashboard/content')
     else:
         form = DoctorApplicationForm()
     return render(request, 'patient/doctor_application.html', {'form': form})
