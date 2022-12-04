@@ -291,7 +291,7 @@ def doctor(request):
 
 
 @login_required(login_url='/members/login_user/')
-def registraterDoctor(request):
+def registerDoctor(request):
     user_data = request.user
     if request.method == 'POST':
         form = DoctorApplicationForm(request.POST)

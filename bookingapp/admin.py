@@ -4,7 +4,7 @@ from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from . import models
-from bookingapp.models import County, Doctor, Patient, Schedule, Appointment
+from bookingapp.models import County, Doctor, Patient, Schedule, Appointment, RegisterDoctor
 
 
 
@@ -26,6 +26,12 @@ class CountyAdmin(admin.ModelAdmin):
     list_display = ['county']
     # list_editable = ['county']
     list_per_page = 10
+
+@admin.register(models.RegisterDoctor)
+class RegisterAdmin(admin.ModelAdmin):
+    list_per_page = 10
+
+    list_display = ['id', 'status']
 
 
 @admin.register(models.Patient)
