@@ -1,0 +1,16 @@
+{% extends 'patient/dashboard.html' %}
+{% block title %}Careers{% endblock %}
+{% block content %}
+
+<section class="page--section">
+    <div class="form--container">
+        <h2 class="page--header">Apply as a Doctor</h2>
+        <form class="form--content" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input class="submit-btn" type="submit" value="Submit">
+        </form>
+    </div>
+</section>
+
+{% endblock %}

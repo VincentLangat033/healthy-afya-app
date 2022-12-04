@@ -288,3 +288,21 @@ def home(request):
 def doctor(request):
     return render(request, 'doctor/doctor.html')
 
+
+
+@login_required(login_url='/members/login_user/')
+def registraterDoctor(request):
+    user_data = request.user
+    if request.method == 'POST':
+        form = DoctorApplicationForm(request.POST)
+        if form.is_valid():
+            specialization = form.cleaned_data.get('specialization')
+            county = form.cleaned_data.get('county')
+            biography = form.cleaned_data.get('biography')
+            application_data = Doctor.objects.create(user=user_data, specialization=specialization, county=county, biography=biography)
+            application_data.save()
+            return redirect('/dashboard-content')
+    else:
+        form = DoctorApplicationForm()
+    return render(request, 'patient/doctor_application.html', {'form': form})
+
