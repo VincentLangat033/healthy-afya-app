@@ -244,6 +244,8 @@ def register_patient(request):
                 print(user.first_name)
                 user_data = Patient.objects.create(user=user, phone=phone, gender=gender, birth_date=birth_date)
                 user_data.save()
+                group = Group.objects.get(name='patient')
+                user.groups.add(group)
                 user = authenticate(username=username, password=password)
                 login(request, user)
                 messages.success(request, ("Registration succesful"))
