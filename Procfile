@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn afyaapp.wsgi
+web: gunicorn afya.wsgi --log-file -
