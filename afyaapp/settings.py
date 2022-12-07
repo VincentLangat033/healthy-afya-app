@@ -29,6 +29,7 @@ DEBUG = True
 
 
 import os
+
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +39,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 #  Check if commit successful
 # Application definition
@@ -151,6 +152,11 @@ USE_TZ = True
 
 STATIC_URL = 'theme/static/'
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
