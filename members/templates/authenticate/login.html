@@ -19,8 +19,8 @@
   
       .note {
         text-align: center;
-        height: 80px;
-        background: -webkit-linear-gradient(left, hsl(12, 88%, 59%), hsl(12, 88%, 59%));
+        height: 50px;
+        background: -webkit-linear-gradient(left, hsl(219, 73%, 51%), hsl(219, 73%, 51%));
         color: #fff;
         font-weight: bold;
         line-height: 50px;
@@ -33,17 +33,25 @@
       }
   
       .form-control {
-        border-radius: 1.5rem;
+        border-radius: 1.2rem;
+        height: 50px;
+        width: 200px;
       }
   
       .btnSubmit {
         border: none;
-        border-radius: 1.5rem;
+        border-radius: 1.2rem;
         padding: 1%;
         width: 20%;
         cursor: pointer;
         background: #0062cc;
         color: #fff;
+        height: 50px;
+        font-size: larger;
+      }
+      .form-label{
+        font-size: x-large;
+        color: black;
       }
     </style>
 </head>
@@ -79,7 +87,7 @@
         <div class="container register-form">
           <div class="form">
             <div class="note">
-              <p>Patient Login Page</p>
+              <p>Login Page</p>
             </div>
     
             <div class="form-content">
@@ -87,7 +95,7 @@
                 <div class="col-md-6">
     
                   <div class="form-group">
-                    <label for="exampleInputEmail1" class="form-label">User Name</label>
+                    <label for="exampleInputEmail1" class="form-label">User Name  :  </label>
                     <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
                   </div> <br><br>
     
@@ -96,7 +104,7 @@
                 <div class="col-md-6">
     
                   <div class="form-group">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <label for="exampleInputPassword1" class="form-label">Password :</label>
                     <input type="password" class="form-control" name="password">
                     <br>
 
@@ -108,7 +116,7 @@
               <button type="submit" class="btnSubmit">Login</button> <br>
               <p> </p>
               <span> Forgot Password? </span> <a href="{% url 'reset_password' %}"> Click Here </a>
-              <div class="text-center">Do not have account? <a href="patientsignup">Signup here</a></div>
+              <div class="text-center">Do not have account? <a href="{% url 'register-patient' %}">Signup here</a></div>
             </div>
           </div>
         </div>

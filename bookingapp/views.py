@@ -225,6 +225,7 @@ def region(request):
 @home_redirect
 def register_patient(request):
         form = RegisterUserForm()
+        mydict={'form':form}
         if request.method == "POST":
             form = RegisterUserForm(request.POST)
             if form.is_valid():
@@ -250,7 +251,8 @@ def register_patient(request):
                 login(request, user)
                 messages.success(request, ("Registration succesful"))
                 return redirect('home')
-        else:            
+        else:
+            # return render(request,'home/register_patient.html',context=mydict )            
             return render(request,'home/register_patient.html', {'form': form} )
 
 @unauthenticated_user
