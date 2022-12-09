@@ -41,6 +41,7 @@ SECRET_KEY = 'django-insecure-2_btyd&%apb4isp3zn_khnmfw!846ri8n6zlvi)lqt7^*io3+(
 
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['https://kim-healthy-afya-app.up.railway.app/','https://*.127.0.0.1']
 
 #  Check if commit successful
 # Application definition
