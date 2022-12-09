@@ -31,7 +31,9 @@ class CountyAdmin(admin.ModelAdmin):
 class RegisterAdmin(admin.ModelAdmin):
     list_per_page = 10
 
-    list_display = ['id', 'status']
+    list_display = ['user', 'status']
+    def username(self, obj):
+        return obj.first_name
 
 
 @admin.register(models.Patient)
