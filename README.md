@@ -23,6 +23,7 @@ At the end of the Sprint, the learner is expected to:
 3. Be able to integrate SQL Database in data storage for a Django web app
 
 # Figma Design File
+[Figma File](https://www.figma.com/file/5LyjtuZYyO29cX7KYdCBWp/Afya-app?node-id=0%3A1&t=Aq7NIndp40eDr9eb-0)
 
 ## About Healthy-Afya
 Healthy Afya is A Doctor Management System
@@ -46,10 +47,9 @@ The three Users in this system are:
 * [Setup](#Setup)
 
 ## Technologies
-* Language: [Python 3.8](https://www.python.org/downloads/release/python-3810/)
-* [JSON](https://www.json.org/json-en.html)
+* Language: [DJANGO](https://docs.djangoproject.com/en/4.1/)
+* [MYSQL](https://www.mysql.com/)
 * [GMAIL](https://www.google.com/gmail/about/)
-* IDE: [Pycharm](https://www.jetbrains.com/help/pycharm/quick-start-guide.html)
 
 ## Features
 ## Patient Dashboard
