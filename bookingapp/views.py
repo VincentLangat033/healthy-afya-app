@@ -186,6 +186,7 @@ def approve_appointment(request, appointment_id):
         # )   
         # email.fail_silently = True
         # email.send()
+        
         return redirect('doctor-dashboard')
     schedule_data = {}
     user = request.user
