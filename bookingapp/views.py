@@ -186,7 +186,7 @@ def approve_appointment(request, appointment_id):
         # )   
         # email.fail_silently = True
         # email.send()
-        
+
         return redirect('doctor-dashboard')
     schedule_data = {}
     user = request.user
@@ -300,9 +300,9 @@ def register_patient(request):
                 group = Group.objects.get(name='patient')
                 user.groups.add(group)
                 user = authenticate(username=username, password=password)
-                login(request, user)
-                messages.success(request, ("Registration succesful"))
-                return redirect('home')
+                # login(request, user)
+                # messages.success(request, ("Registration succesful"))
+                return redirect('login')
         else:
             # return render(request,'home/register_patient.html',context=mydict )            
             return render(request,'home/register_patient.html', {'form': form} )
