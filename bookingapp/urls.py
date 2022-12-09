@@ -5,6 +5,7 @@ from .import views
 urlpatterns = [
     path('', views.home, name="home"),
     path('register/', views.register_patient, name="register-patient"),
+    path('register_doctor/', views.registere_doctor, name= 'register-doctor'),
     path( 'counties/', views.counties, name='counties'),
     path( 'show-county/<county_id>/', views.show_county, name='county'),
     path('patient/dashboard/', views.patient_dashboard, name= 'patient-dashboard'),
@@ -15,7 +16,9 @@ urlpatterns = [
     path('view_all_appointments/', views.view_all_appointments, name='view-_all-appointments'),
     path('patient_reviews/', views.patient_reviews, name='patient-reviews'),
     path('all_doctors/', views.all_doctors, name='all-doctors'),
-    path('patient/doctor_application', views.register_doctor, name= 'doctor-application'),
+    path('patient/doctor_application', views.register_doctor, name= 'doctor-application'), 
+    path('registration_dashboard', views.registration_dashboard, name= 'registration-dashboard'), 
+    
 
     # Doctor routes base_doctor
     path('doctor/', views.base_doctor, name= 'base-doctor'),

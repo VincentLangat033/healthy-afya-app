@@ -1,0 +1,27 @@
+{% load static %}  
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}  
+    <link href="{% static 'css/bootstrap.min.css' %}"> 
+    {% tailwind_css %}
+    <link href="{% static 'css/bootstrap.min.css' %}">  
+    <script src="{% static 'bootstrap.min.js' %}"></script>  
+    <!-- <script>alert();</script>   -->
+    <title>Afya-app</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    
+</head>
+<body> 
+    <center>
+    <div class="xl:flex space-x-6 mx-auto mt-8 sm:flex flex-col md:flex-col ">
+        <a href="{% url 'register-patient' %}" class="hover:text-green-800"> I am Patient</a>
+        <a href="{% url 'register-doctor' %}" class="hover:text-green-800"> I am Doctor</a>
+
+    </div>
+</center>
+</body>

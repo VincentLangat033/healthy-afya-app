@@ -223,6 +223,45 @@ def region(request):
 
 @unauthenticated_user
 @home_redirect
+def registration_dashboard(request):
+    return render(request,'home/registration_dashboard.html')
+
+
+@home_redirect
+def registere_doctor(request):
+    form = RegisterUserForm()
+    mydict={'form':form}
+    if request.method == "POST":
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # user = form.save()
+            # group = Group.objects.get(name='patient')
+            # user.groups.add(group)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            phone = form.cleaned_data.get('phone')
+            gender = form.cleaned_data.get('gender')
+            birth_date = form.cleaned_data.get('birth_date')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            user = User.objects.get(username=username)
+            print(user.username)
+            print(user.first_name)
+            user_data = Patient.objects.create(user=user, phone=phone, gender=gender, birth_date=birth_date)
+            user_data.save()
+            group = Group.objects.get(name='patient')
+            user.groups.add(group)
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ("Registration succesful"))
+            return redirect('home')
+    else:
+        # return render(request,'home/register_patient.html',context=mydict )            
+        return render(request,'home/register_patient.html', {'form': form} )
+
+@unauthenticated_user
+@home_redirect
 def register_patient(request):
         form = RegisterUserForm()
         mydict={'form':form}
