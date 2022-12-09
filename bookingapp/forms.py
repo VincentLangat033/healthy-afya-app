@@ -145,12 +145,12 @@ class RejectAppointmentForm(ModelForm):
 class DoctorApplicationForm(ModelForm):
     SPECIALIZATION_CHOICES = [
         ('Cardiologist', 'CARD'),
-        ('DERMA', 'Dermatologist'),
-        ('EMERGE', 'Emergency Specialist'),
-        ('ALLERGY', 'Allergy Specialist'),
-        ('ANAE', 'Anesthesiologist'),
-        ('COLON', 'COlon and Rectal Surgeon'),
-        ('NORMAL', 'Consultant'),
+        ('Dermatologist', 'Dermatologist'),
+        ('Emergency Specialist', 'Emergency Specialist'),
+        ('Allergy Specialist', 'Allergy Specialist'),
+        ('Anesthesiologist', 'Anesthesiologist'),
+        ('COlon and Rectal Surgeon', 'COlon and Rectal Surgeon'),
+        ('Consultant', 'Consultant'),
     ]
 
     STATUS_CHOICE = [
