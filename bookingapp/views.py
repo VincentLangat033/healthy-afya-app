@@ -14,7 +14,7 @@ from .utility import appointment_availability
 from .decorators import unauthenticated_user, allowed_users, home_redirect
 
 
-@login_required(login_url='/members/login_user/')
+
 def doctor_region(request):
     doctor_region = County.objects.all()
     return render(request, 'doctor/regions.html',{'doctor_region': doctor_region})
@@ -29,7 +29,7 @@ def book_appointment(request):
     counties = County.objects.all()
     return render(request, 'patient/book_appointment.html',{'counties': counties})
 
-@login_required(login_url='members/login_user/')
+
 def view_doctor_by_county(request, county_id):
     county_doctor = Doctor.objects.filter(county=county_id).order_by('specialization')
     # user_session = request.user
@@ -45,6 +45,8 @@ def view_doctor_by_county(request, county_id):
     # print(county_doctor)
     return render(request, 'patient/doctor_by_county.html', { 'county_doctor': county_doctor })
 
+
+@login_required(login_url='/members/login_user/')
 def appointment_form(request, doctor_id):
     schedule_data = {}
     pk = doctor_id
@@ -154,6 +156,7 @@ def patients_appointments(request):
 def patient_reviews(request):
     return render(request, 'patient/review.html')
 
+
 def all_doctors(request):
     doctor = Doctor.objects.all()
     return render(request, 'patient/doctors.html', {'doctor': doctor})
@@ -163,6 +166,8 @@ def view_appointment(request, appointment_id):
     context = {'appointment_data': appointment_data}
     return render(request, 'doctor/view_appointment.html', context=context)
 
+@unauthenticated_user
+@home_redirect
 def approve_appointment(request, appointment_id):
     appointment_data = Appointment.objects.get(id=appointment_id)
     doctor_data = {}
@@ -203,7 +208,8 @@ def approve_appointment(request, appointment_id):
     context = {'form': form, 'filtered_schedule': filtered_schedule}
     return render(request, 'doctor/approve_appointment.html', context=context)
 
-
+@unauthenticated_user
+@home_redirect
 def reject_appointment(request, appointment_id):
     appointment_data = Appointment.objects.get(id=appointment_id)
     form = RejectAppointmentForm(request.POST or None, instance=appointment_data)
@@ -222,21 +228,16 @@ def reject_appointment(request, appointment_id):
 
 
 
-
-
-
-
 def show_county(request, county_id):
     county = County.objects.get(pk=county_id)
     return render(request, 'county/show_county.html',{'county': county})
 
 
 
-@login_required(login_url='/members/login_user/')
+
 def counties(request):
     counties = County.objects.all()
     return render(request, 'county/counties.html', {'counties': counties})
-
 
 def region(request):
     return render(request, 'doctor/region.html')
@@ -362,7 +363,7 @@ def register_doctor(request):
         form = DoctorApplicationForm()
     return render(request, 'patient/doctor_application.html', {'form': form})
 
-
+@login_required(login_url='/members/login_user/')
 def schedule(request):
     if Doctor.objects.filter(user = request.user).exists():
         dock = Doctor.objects.get(user = request.user)
