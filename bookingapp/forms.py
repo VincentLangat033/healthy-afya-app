@@ -22,6 +22,16 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'phone', 'gender', 'birth_date', 'first_name', 'last_name', 'email', 'password1', 'password2')
+    # class Meta:
+#         model= User
+#         fields=['first_name','last_name','username', 'email', 'password']
+#         widgets = {
+#         'password': forms.PasswordInput()
+#         }
+# class PatientForm(ModelForm):
+#     class Meta:
+#         model = Patient
+#         fields = ['gender','age', 'birth_date', 'phone']
 
 
 class RegisterDoctorForm(UserCreationForm):
@@ -43,6 +53,18 @@ class RegisterDoctorForm(UserCreationForm):
         fields = ('username', 'phone', 'gender', 'birth_date', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
 
+class DoctorForm(ModelForm):
+    class Meta:
+        model = Doctor
+        fields = "__all__"
+        exclude = ['user', 'is_verified']
+class DoctorUserForm(ModelForm):
+    class Meta:
+        model=User
+        fields=['first_name','last_name','username', 'email', 'password']
+        widgets = {
+        'password': forms.PasswordInput()
+        } 
 
 class BookAppointmentForm(ModelForm):
     appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field', 'placeholder': 'Enter Date', 'autocomplete': 'off'}), required=True)

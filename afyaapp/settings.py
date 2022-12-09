@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'members',
     'static',
+    'widget_tweaks',
 ]
 TAILWIND_APP_NAME = 'theme'
 

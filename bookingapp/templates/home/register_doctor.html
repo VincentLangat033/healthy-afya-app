@@ -1,0 +1,80 @@
+{% load static %}
+{% load tailwind_tags %}  
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap.min.css' %}"> 
+    {% tailwind_css %}
+    <script src="{% static 'bootstrap.min.js' %}"></script>  
+
+    <title>Login</title>
+
+</head>
+    <body>
+        <center> <br> <br>
+<form method="POST" class="patient-form" enctype="multipart/form-data" style="height: auto;">
+    {% csrf_token %}
+        <div class="form-group">
+          {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
+        </div>
+        <div class="form-group">
+          {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
+        </div> 
+        <div class="form-group">
+          {% render_field userForm.username class="form-control" placeholder="Username" %}
+        </div>
+        
+        <div class="form-group">
+          {% render_field userForm.email class="form-control" placeholder="Email Address" %}
+        </div>
+        <div class="form-group">
+          {% render_field doctorForm.phone class="form-control"  placeholder="Mobile number" %}
+        </div>
+        <div class="form-group">
+          {% render_field userForm.password class="form-control" placeholder="Password" %}
+        </div>
+        <div class="form-group">
+            Specialitization: {% render_field doctorForm.specialization class="form-control" placeholder="Specialitization" %}
+        </div>
+        <div class="form-group">
+            County:  {% render_field doctorForm.county class="form-control" placeholder="County" %}
+        </div>
+        <div class="form-group">
+          {% render_field doctorForm.age required="required" class="form-control" placeholder="age" %}
+        </div>
+        <div class="form-group">
+          {% render_field doctorForm.gender class="form-control" placeholder="gender" %}
+        </div>
+    <div>
+      <input style=" 
+          cursor: pointer;
+          width: 100%;
+          padding: .6rem 0;
+          border-radius: .5rem;
+          border: none;
+          background-color: var(--primary-color);
+          color: var(--white);
+          font-size: 1.2rem;
+          outline: none;
+      "
+        class="submit"
+        type="submit"
+        value="Register Account"
+      />
+    </div>
+    <div class="mt-4">
+      <div class="d-flex justify-content-center links" style=" 
+      text-align: center;
+      ">
+        Already have an account?
+        <a href="{% url 'login' %}" class="ml-2">Login</a>
+      </div>
+    </div>
+  </form>
+</center>
+  </body>
+</html>

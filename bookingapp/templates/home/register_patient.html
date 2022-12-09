@@ -1,5 +1,6 @@
 {% load static %}
 {% load tailwind_tags %}  
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,7 +112,7 @@
                 </div>
               </form> -->
 
-              <div class="form-control">
+              <div class="form-control mx-auto space-x-6">
   
                 {% csrf_token %}
                 {{ form.as_p}}
@@ -128,6 +129,17 @@
           </div>
         </div>
       </div>
+
+
+
+
+					<!-- <form method="POST" action="" class="patient-form" style=" height: auto;">
+						{% csrf_token %}
+						<div class="form-group">
+							{% render_field form.first_name class="form-control" placeholder="First Name" %}
+						  </div> -->
+						
+
  
       
 
