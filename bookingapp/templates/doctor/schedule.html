@@ -140,10 +140,34 @@
 
 <body>
     
-             {{ doctor  }}
-             {{ doctor }}
+  <div class="schedule" style="height:auto; padding: 10px 20px;"
 
-             {{ schedule.tuesday }}
+  >
+      <h3 style="border-radius: 15px 15px 0 0  ; ">Create Your Schedule</h3>
+      <form action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="input-group">
+              <h4>Select the days you'll be available</h4>
+              <div class="form-group">
+                  {{form}}
+              </div>
+          </div>
+          <div class="actions">
+              <div class="submit">
+                  <label for="submit"></label>
+                  <input type="submit" id="submit" name="submit" value="Submit">
+              </div>
+              <div class="cancel">
+                  <label for="cancel"></label>
+                  <input type="reset" id="cancel" name="cancel" value="Cancel">
+              </div>
+          </div>
+          {% for message in messages %}
+          {{ message | safe }}
+          {% endfor %}
+          {{form.errors}}
+      </form>
+  </div>
              
              
 
