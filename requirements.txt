@@ -5,7 +5,9 @@ django-browser-reload==1.6.0
 django-dotenv==1.4.2
 django-environ==0.9.0
 django-tailwind==3.4.0
+django-widget-tweaks==1.4.12
 gunicorn==20.1.0
 mysql-client==0.0.1
+python-dotenv==0.21.0
 sqlparse==0.4.3
 whitenoise==6.2.0
