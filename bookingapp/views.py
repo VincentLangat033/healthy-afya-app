@@ -5,6 +5,8 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import  messages
+from django.core.mail import EmailMessage
+from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from .forms import *
 from .models import Patient, County, Doctor, Appointment, Schedule
@@ -52,12 +54,21 @@ def appointment_form(request, doctor_id):
     # user = User.objects.get(id=user_data)
     user = User.objects.get(pk=request.user.pk)
     doctor = Doctor.objects.get(id=pk)
+    user_email = request.user.email
     form = BookAppointmentForm(request.POST)
     if form.is_valid():
         appointment_date = form.cleaned_data.get('appointment_date')
         symptoms = form.cleaned_data.get('symptoms')
         appointment_data = Appointment.objects.create(appointment_date=appointment_date, symptoms=symptoms, user=user, doctor=doctor)
         appointment_data.save()
+        email = EmailMessage(
+            'Your Appointment Update',
+            f'Greetings {user},\nThank you for booking an appointment with {doctor} on {appointment_date} Your Appointment is pending, you will get an email again once your doctor approves',
+            settings.EMAIL_HOST_USER,
+            [user_email]
+        )   
+        email.fail_silently = True
+        email.send()
         return render(request, 'patient/dashboard.html')
     else:
         form = BookAppointmentForm()
@@ -165,7 +176,16 @@ def approve_appointment(request, appointment_id):
     form = ApproveAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
         date = form.cleaned_data.get('appointment_date')
+        user_email = request.patient.email
         form.save()
+        email = EmailMessage(
+            'Your Appointment Update',
+            f'Greetings {user},\nThank you for booking an appointment with {doctor} on {date} Your Appointment is pending, you will get an email again once your doctor approves',
+            settings.EMAIL_HOST_USER,
+            [user_email]
+        )   
+        email.fail_silently = True
+        email.send()
         return redirect('doctor-dashboard')
     schedule_data = {}
     user = request.user
@@ -341,3 +361,27 @@ def register_doctor(request):
         form = DoctorApplicationForm()
     return render(request, 'patient/doctor_application.html', {'form': form})
 
+
+def schedule(request):
+    if Doctor.objects.filter(user = request.user).exists():
+        dock = Doctor.objects.get(user = request.user)
+    else:
+        return HttpResponse("No such Doctor Found")
+    form = DoctorScheduleForm()
+    if request.method == 'POST':
+        form = DoctorScheduleForm(request.POST)
+        if form.is_valid():
+            if Schedule.objects.filter(doctor =dock).exists():
+               Schedule.objects.get(doctor=dock).delete()
+               print("Overwriting the doctor object") 
+            monday = form.cleaned_data.get('monday')
+            tuesday = form.cleaned_data.get('tuesday')
+            wednesday = form.cleaned_data.get('wednesday')
+            thursday = form.cleaned_data.get('thursday')
+            friday = form.cleaned_data.get('friday')
+            schedule = Schedule(monday=monday,tuesday=tuesday,thursday=thursday,wednesday=wednesday,friday=friday, doctor=dock)
+            schedule.save()
+            messages.success(request, "Success: Schedule created.")
+        return redirect('doctor-dashboard')
+
+    return render(request, 'doctor/schedule.html',{'form':form})
