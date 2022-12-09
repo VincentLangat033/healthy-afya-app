@@ -73,7 +73,7 @@ Once a Doctor is approved and/or created by the admin, they will be able to log 
 - They can log off at any time.
 
 ### Admin Dashboard
-![image](doctor-dashboard.png)
+![image](admin_dashboard.png)
 
 
 
@@ -94,8 +94,15 @@ Start the program by running the following command:
 ```bash 
 python main.py
 ```
+## Challenges during development
+- Production server a bit slow   [Link](https://kim-healthy-afya-app.up.railway.app/) 
+- Used Tailwind for styling and had to occasionally revert to vanilla css
+- Further integrating and utilization of Models in django
+- Trouble implementing django authentication systems (managed to get it done)
+
 ## Known Bugs
-There are no known bugs in this program and all the functionalities stated to be executable are indeed working.
+There are no known bugs, however you may find some buttons are unresponsive
+
 
 ## Contributions
 Feel free to fork and clone this repository and contribute to it!
