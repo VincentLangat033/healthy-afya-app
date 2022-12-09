@@ -56,48 +56,26 @@ The three Users in this system are:
 A patient dashboard appears once a User is authenitciated as a Patient
 # Patient Dashboard
 ![image](patient_dashboard.png)
-### Customer Operations
-A user is able to feed into the system customer data, view available customers, update existing customer data and delete a particular customer. All customer records can further be accessed.
-A customer can be able to view available products or exit at this stage. 
-The customer details are stored in customers.json
+### Patient Journey
+- A patient is able to create an account and login
+- A patient can book an appointment with a doctor according to their desired regions
+- As soon as they book, they'll receive an eamil that their appointment is pending awaiting the Doctors approval
+- A patient can apply to be a doctor
+- A patient can then log off the system ( A few other links still cooking😊)
 
-    Sample Customer details Format
-    ```
-        [
-            {
-                "name": "Vincent Kimutai",
-                "age": "24",
-                "email": "kimutai@gmail.com",
-                "phone": "0723265092"
-                  "id": "5",
-            },
-        ]
-    ```
-### Product Operations
-A user can key in the product's data for inventory purposes, view the available products, update product data and delete a product. 
-A customer can proceed to purchases at this point here-in or exit the program.
-The products are stored at products.json file
+### Doctor Dashboard
+![image](doctor-dashboard.png)
 
-    Sample Product details Format
-    ```
-        [
-            {
-                "name": "Dell laptop",
-                "quantity": 800,
-                "cost": 66_500,
-                "id": 2
-            },
-        ]
-    ```
-### Purchase function
-Before a customer makes any purchases, they first need to be authenticated.
-When the customer is authenticated, they can then proceed to view all the available products and their quantities.
-A customer can then begin to make purchases. The products they purchases are added to a cart and the totals for each product and its quantities are calculated at that point, if the customer wishes to proceed to make purchases, then their sub-totals
-will be added to the previous. 
-When the customer is done purchasing, a receipt is given to them which contains their name, the product they purchased, the quantities and the total cost.
-The customer is further asked whether they would like to receive such a receipt via email. If the customer accepts, the receipt is send to their email and this only happens if the customer provided an existing email.
-The program then terminates at this point.
-Further advancement could include having a customer purchase history, checking whether a product really exists before adding it to the products json file.
+### Doctor Journey
+Once a Doctor is approved and/or created by the admin, they will be able to log in and perform the following:
+- View  their appointments where they can reject or approve
+- Create their Schedule
+- They can log off at any time.
+
+### Admin Dashboard
+![image](doctor-dashboard.png)
+
+
 
 
 ## Setup
