@@ -176,16 +176,16 @@ def approve_appointment(request, appointment_id):
     form = ApproveAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
         date = form.cleaned_data.get('appointment_date')
-        user_email = request.patient.email
-        form.save()
-        email = EmailMessage(
-            'Your Appointment Update',
-            f'Greetings {user},\nThank you for booking an appointment with {doctor} on {date} Your Appointment is pending, you will get an email again once your doctor approves',
-            settings.EMAIL_HOST_USER,
-            [user_email]
-        )   
-        email.fail_silently = True
-        email.send()
+        # user_email = request.patient.email
+        # form.save()
+        # email = EmailMessage(
+        #     'Your Appointment Update',
+        #     f'Greetings {user},\nThank you for booking an appointment with {doctor} on {date} Your Appointment is pending, you will get an email again once your doctor approves',
+        #     settings.EMAIL_HOST_USER,
+        #     [user_email]
+        # )   
+        # email.fail_silently = True
+        # email.send()
         return redirect('doctor-dashboard')
     schedule_data = {}
     user = request.user
