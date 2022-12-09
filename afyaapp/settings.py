@@ -36,9 +36,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+# SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECRET_KEY = 'django-insecure-2_btyd&%apb4isp3zn_khnmfw!846ri8n6zlvi)lqt7^*io3+('
+SECRET_KEY = 'django-insecure-2_btyd&%apb4isp3zn_khnmfw!846ri8n6zlvi)lqt7^*io3+('
 
 
 ALLOWED_HOSTS = ["*"]
