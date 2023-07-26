@@ -1,5 +1,4 @@
 #`Doctor Booking System (Healthy-Afya App)`
-## SEPA Program Sprint Two
 
 # Problem Definition
 From time to time, patients usually require specialized treatment in cities such as
